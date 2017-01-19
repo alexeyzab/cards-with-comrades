@@ -3,4 +3,5 @@ module Import
     ) where
 
 import Foundation            as Import
+import Helpers.Views         as Import
 import Import.NoFoundation   as Import

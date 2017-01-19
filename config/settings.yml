@@ -24,12 +24,12 @@ ip-from-header: "_env:IP_FROM_HEADER:false"
 # See https://github.com/yesodweb/yesod/wiki/Configuration#parsing-numeric-values-as-strings
 
 database:
-  user:     "_env:PGUSER:cards-with-comrades_LOWER"
-  password: "_env:PGPASS:cards-with-comrades"
+  user:     "_env:PGUSER:cards-with-comrades"
+  password: "_env:PGPASS:password"
   host:     "_env:PGHOST:localhost"
   port:     "_env:PGPORT:5432"
   # See config/test-settings.yml for an override during tests
-  database: "_env:PGDATABASE:cards-with-comrades_LOWER"
+  database: "_env:PGDATABASE:cards-with-comrades-dev"
   poolsize: "_env:PGPOOLSIZE:10"
 
 copyright: Insert copyright statement here

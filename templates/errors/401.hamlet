@@ -1,0 +1,10 @@
+<div id="focus" class="background nav-offset">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <span id="text-401">401</span>
+            <div class="col-sm-12 text-center">
+                <p>
+                  <strong>Not Authorized, do you need to login?</strong>
+                  <a href=@{HomeR}>Want to go home?</a>
+                  <a href=@{LoginR}>Click here to log in.</a>

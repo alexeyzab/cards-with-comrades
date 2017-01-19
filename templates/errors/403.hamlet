@@ -1,0 +1,9 @@
+<div id="focus" class="background nav-offset">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <span id="text-403">403</span>
+            <div class="col-sm-12 text-center">
+                <p>
+                  <strong>Not Permitted, are you in the right place?</strong>
+                  <a href=@{HomeR}>Want to go home?</a>
