@@ -91,7 +91,6 @@ deleteLoginData
     :: YesodLog site
     => HandlerT site IO ()
 deleteLoginData = do
-  deleteSession "user_email"
   deleteSession userSess
   deleteSession rememberSess
   deleteSession timestampSess
