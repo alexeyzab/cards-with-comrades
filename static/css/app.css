@@ -1,0 +1,11 @@
+a.plain {
+    color: #000;
+}
+
+a.plain:visited {
+    color: #000;
+}
+
+li.menu-logo {
+    font-weight: bold;
+}

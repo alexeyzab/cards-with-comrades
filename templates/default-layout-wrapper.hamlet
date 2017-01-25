@@ -12,14 +12,18 @@ $newline never
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     ^{pageHead pc}
-
+ 
+    <link rel="stylesheet" href="@{StaticR css_foundation_min_css}">
+    <link rel="stylesheet" href="@{StaticR css_app_css}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel="stylesheet" type="text/css">
     \<!--[if lt IE 9]>
     \<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     \<![endif]-->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js">
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"> -->
+    <script type="text/javascript" src="@{StaticR js_vendor_jquery_js}">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.0.3/js.cookie.min.js">
 
     <script>
@@ -40,8 +44,9 @@ $newline never
       \  });
       }
 
-    <script>
-      document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/,'js');
+   <script type="text/javascript" src="@{StaticR js_vendor_what_input_js}"/>
+   <script type="text/javascript" src="@{StaticR js_vendor_foundation_min_js}"/>
+
   <body>
     ^{pageBody pc}
 

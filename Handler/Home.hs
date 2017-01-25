@@ -11,5 +11,5 @@ getHomeR = do
 postHomeR :: Handler Html
 postHomeR = do
     baseLayout "Home" Nothing [whamlet|
-    Home!
+
     |]

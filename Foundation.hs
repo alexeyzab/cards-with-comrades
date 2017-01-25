@@ -27,8 +27,10 @@ mkYesodData "App" [parseRoutes|
 /favicon.ico FaviconR GET
 /robots.txt RobotsR GET
 
-/        HomeR    GET POST
-/login   LoginR   GET POST
+/           HomeR    GET POST
+/login      LoginR   GET POST
+/signup     SignupR  GET POST
+/signout    SignoutR GET
 |]
 
 htmlOnly :: (MonadHandler m) => m Html -> m TypedContent
@@ -36,6 +38,43 @@ htmlOnly = selectRep . provideRep
 
 -- | A convenient synonym for creating forms.
 type Form x = Html -> MForm (HandlerT App IO) (FormResult x, Widget)
+
+navLayout :: Maybe (Entity User) -> Widget
+navLayout user =
+  [whamlet|
+<div class="top-bar">
+  <div class="top-bar-left">
+    <ul class="menu">
+      <li .menu-logo>
+        <a href="@{HomeR}" .plain>Cards With Comrades
+  <div class="top-bar-right">
+    <ul class="menu">
+      $maybe _ <- user
+        <li>
+          <a href="@{SignoutR}">Signout
+      $nothing
+        <li>
+          <a href="@{LoginR}">Login
+        <li>
+          <a href="@{SignupR}">Signup
+|]
+
+baseLayout :: Html -> Maybe (Entity User) -> WidgetT App IO () -> Handler Html
+baseLayout title user content = do
+  defaultLayout $ do
+    setTitle title
+    [whamlet|
+^{navLayout user}
+^{content}
+|]
+
+errorFragment :: Text -> Widget
+errorFragment t =
+  [whamlet|
+<div .row #content>
+  <div .large-8 .columns>
+    <h1>#{t}
+|]
 
 instance Yesod App where
     approot = ApprootRequest $ \app req ->
@@ -52,40 +91,32 @@ instance Yesod App where
     defaultLayout widget = do
       master <- getYesod
       mcurrentRoute <- getCurrentRoute
-      pc <- widgetToPageContent $ do
-          addStylesheet $ StaticR css_bootstrap_css
-          [whamlet|^{widget}|]
+      pc <- widgetToPageContent [whamlet|^{widget}|]
       withUrlRenderer $(hamletFile "templates/default-layout-wrapper.hamlet")
 
-    errorHandler NotFound =
-      htmlOnly $ defaultLayout $ do
-        setTitle "Not found!"
-        [whamlet|404|]
+    errorHandler NotFound = do
+      user <- getUser
+      htmlOnly $ baseLayout "Not found!" user $ errorFragment "401"
 
-    errorHandler (InternalError err) =
-      htmlOnly $ defaultLayout $ do
-        setTitle "Our bad!"
-        [whamlet|500|]
+    errorHandler (InternalError err) = do
+      user <- getUser
+      htmlOnly $ baseLayout "Our bad!" user $ errorFragment "500"
 
-    errorHandler (InvalidArgs _) =
-      htmlOnly $ defaultLayout $ do
-        setTitle "Invalid request"
-        [whamlet|400|]
+    errorHandler (InvalidArgs _) = do
+      user <- getUser
+      htmlOnly $ baseLayout "Invalid request" user $ errorFragment "400"
 
-    errorHandler NotAuthenticated =
-      htmlOnly $ defaultLayout $ do
-        setTitle "Not authenticated"
-        [whamlet|401|]
+    errorHandler NotAuthenticated = do
+      user <- getUser
+      htmlOnly $ baseLayout "Not authenticated" user $ errorFragment "401"
 
-    errorHandler (PermissionDenied _) =
-      htmlOnly $ defaultLayout $ do
-        setTitle "Permission denied"
-        [whamlet|403|]
+    errorHandler (PermissionDenied _) = do
+      user <- getUser
+      htmlOnly $ baseLayout "Permission denied" user $ errorFragment "403"
 
-    errorHandler (BadMethod _) =
-      htmlOnly $ defaultLayout $ do
-        setTitle "Bad method for request"
-        [whamlet|400|]
+    errorHandler (BadMethod _) = do
+      user <- getUser
+      htmlOnly $ baseLayout "Bad method for request" user $ errorFragment "400"
 
     addStaticContent ext mime content = do
         master <- getYesod
