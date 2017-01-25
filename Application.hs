@@ -15,7 +15,7 @@ module Application
 
 import Control.Monad.Logger                 (liftLoc, runLoggingT)
 import Database.Persist.Postgresql          (createPostgresqlPool, pgConnStr,
-                                             pgPoolSize, runSqlPool)
+                                             pgPoolSize)
 import Import
 import Language.Haskell.TH.Syntax           (qLocation)
 import Network.Wai (Middleware)
@@ -51,8 +51,6 @@ makeFoundation appSettings = do
     pool <- flip runLoggingT logFunc $ createPostgresqlPool
         (pgConnStr  $ appDatabaseConf appSettings)
         (pgPoolSize $ appDatabaseConf appSettings)
-
-    runLoggingT (runSqlPool (runMigration migrateAll) pool) logFunc
 
     return $ mkFoundation pool
 
