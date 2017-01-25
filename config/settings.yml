@@ -24,7 +24,7 @@ ip-from-header: "_env:IP_FROM_HEADER:false"
 # See https://github.com/yesodweb/yesod/wiki/Configuration#parsing-numeric-values-as-strings
 
 database:
-  user:     "_env:PGUSER:cards-with-comrades"
+  user:     "_env:PGUSER:postgres"
   password: "_env:PGPASS:password"
   host:     "_env:PGHOST:localhost"
   port:     "_env:PGPORT:5432"

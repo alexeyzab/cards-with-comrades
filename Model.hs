@@ -37,7 +37,7 @@ runMigrations = runMigration migrateAll
 
 devConn :: ConnectionString
 devConn =
-  "dbname=cards-with-comrades-dev host=cards-with-comrades-dev user=postgres password=password port=5432"
+  "dbname=cards-with-comrades-dev host=localhost user=postgres password=password port=5432"
 
 runDevDB :: DB a -> IO a
 runDevDB a =

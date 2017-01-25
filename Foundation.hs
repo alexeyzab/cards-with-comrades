@@ -2,12 +2,8 @@ module Foundation where
 
 import Import.NoFoundation
 
-import AppType
-import Routes
-
 import qualified Data.CaseInsensitive as CI
 
-import Helpers.Views
 import Text.Hamlet          (hamletFile)
 import Text.Jasmine         (minifym)
 
@@ -17,8 +13,29 @@ import qualified Yesod.Core.Unsafe as Unsafe
 
 import Handler.Sessions
 
+data App = App
+    { appSettings    :: AppSettings
+    , appStatic      :: Static -- ^ Settings for static file serving.
+    , appConnPool    :: ConnectionPool -- ^ Database connection pool.
+    , appHttpManager :: Manager
+    , appLogger      :: Logger
+    }
+
+mkYesodData "App" [parseRoutes|
+/static StaticR Static appStatic
+
+/favicon.ico FaviconR GET
+/robots.txt RobotsR GET
+
+/        HomeR    GET POST
+/login   LoginR   GET POST
+|]
+
 htmlOnly :: (MonadHandler m) => m Html -> m TypedContent
 htmlOnly = selectRep . provideRep
+
+-- | A convenient synonym for creating forms.
+type Form x = Html -> MForm (HandlerT App IO) (FormResult x, Widget)
 
 instance Yesod App where
     approot = ApprootRequest $ \app req ->
@@ -33,42 +50,42 @@ instance Yesod App where
     yesodMiddleware = sessionMiddleware . defaultYesodMiddleware
 
     defaultLayout widget = do
-        master <- getYesod
-        mcurrentRoute <- getCurrentRoute
-        pc <- widgetToPageContent $ do
-            addStylesheet $ StaticR css_bootstrap_css
-            $(widgetFile "default-layout")
-        withUrlRenderer baseTemplate
+      master <- getYesod
+      mcurrentRoute <- getCurrentRoute
+      pc <- widgetToPageContent $ do
+          addStylesheet $ StaticR css_bootstrap_css
+          [whamlet|^{widget}|]
+      withUrlRenderer $(hamletFile "templates/default-layout-wrapper.hamlet")
 
     errorHandler NotFound =
       htmlOnly $ defaultLayout $ do
         setTitle "Not found!"
-        $(widgetFile "errors/404")
+        [whamlet|404|]
 
     errorHandler (InternalError err) =
       htmlOnly $ defaultLayout $ do
         setTitle "Our bad!"
-        $(widgetFile "errors/500")
+        [whamlet|500|]
 
     errorHandler (InvalidArgs _) =
       htmlOnly $ defaultLayout $ do
         setTitle "Invalid request"
-        $(widgetFile "errors/400")      
+        [whamlet|400|]
 
     errorHandler NotAuthenticated =
       htmlOnly $ defaultLayout $ do
         setTitle "Not authenticated"
-        $(widgetFile "errors/401")      
+        [whamlet|401|]
 
     errorHandler (PermissionDenied _) =
       htmlOnly $ defaultLayout $ do
         setTitle "Permission denied"
-        $(widgetFile "errors/403")      
+        [whamlet|403|]
 
     errorHandler (BadMethod _) =
       htmlOnly $ defaultLayout $ do
         setTitle "Bad method for request"
-        $(widgetFile "errors/400")      
+        [whamlet|400|]
 
     addStaticContent ext mime content = do
         master <- getYesod
