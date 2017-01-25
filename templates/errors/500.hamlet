@@ -1,9 +1,0 @@
-<div id="focus" class="background nav-offset">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12 text-center">
-                <span id="text-500">500</span>
-            <div class="col-sm-12 text-center">
-                <p>
-                    <strong>internal error</strong>
-                <pre>#{err}
