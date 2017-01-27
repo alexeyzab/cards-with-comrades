@@ -93,7 +93,23 @@ getSignupR = do
   renderSignup signupFormWidget
 
 postSignupR :: Handler Html
-postSignupR = undefined
+postSignupR = do
+  redirectIfLoggedIn HomeR
+  ((result, widget), _) <- runFormPost signupForm
+  case result of
+    FormSuccess (email, password) -> do
+      -- Check to see if a user with this email already exists
+      maybeUP <- runDB (getUserPassword email)
+      case maybeUP of
+        -- If it does, render the form again (?)
+        (Just _) -> do
+          renderSignup widget
+        -- If not, create a user
+        Nothing -> do
+          (Just (Entity dbUserKey _)) <- runDB $ createUser email password
+          setUserSession dbUserKey True
+          redirect HomeR
+    _ -> renderSignup widget
 
 getSignoutR :: Handler Html
 getSignoutR = undefined

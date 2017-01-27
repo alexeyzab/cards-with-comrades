@@ -39,6 +39,21 @@ getUserPassword email = fmap listToMaybe $
   where_ (user ^. UserEmail ==. val email)
   return (user, pass)
 
+getUserEntity :: Text -> DB (Maybe (Entity User))
+getUserEntity email = fmap listToMaybe $
+  select $
+  from $ \user -> do
+  where_ (user ^. UserEmail ==. val email)
+  return user
+
+createUser :: Text -> Text -> DB (Maybe (Entity User))
+createUser email pass = do
+  uid <- insert $ User email
+  hash <- liftIO $ hashPassword pass
+  password <- insert $ Password hash uid
+  userEntity <- getUserEntity email
+  return userEntity
+
 dumpMigration :: DB ()
 dumpMigration = printMigration migrateAll
 
