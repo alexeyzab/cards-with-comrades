@@ -29,6 +29,7 @@ library
           Handler.Common
           Handler.Home
           Handler.Sessions
+          Helpers.Forms
           Helpers.Views
           Model.BCrypt
           Model.Instances
@@ -58,6 +59,7 @@ library
         , either                        >= 4.4        && < 4.5
         , email-validate                >= 2.2        && < 2.3
         , errors
+        , esqueleto
         , exceptions                    >= 0.8        && < 0.9
         , fast-logger                   >= 2.4        && < 2.5
         , file-embed
@@ -125,6 +127,7 @@ executable cards-with-comrades
         , either                        >= 4.4        && < 4.5
         , email-validate                >= 2.2        && < 2.3
         , errors
+        , esqueleto
         , exceptions                    >= 0.8        && < 0.9
         , fast-logger                   >= 2.4        && < 2.5
         , file-embed
@@ -199,6 +202,7 @@ executable migration
         , either                        >= 4.4        && < 4.5
         , email-validate                >= 2.2        && < 2.3
         , errors
+        , esqueleto
         , exceptions                    >= 0.8        && < 0.9
         , fast-logger                   >= 2.4        && < 2.5
         , file-embed

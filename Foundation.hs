@@ -96,7 +96,7 @@ instance Yesod App where
 
     errorHandler NotFound = do
       user <- getUser
-      htmlOnly $ baseLayout "Not found!" user $ errorFragment "401"
+      htmlOnly $ baseLayout "Not found!" user $ errorFragment "404"
 
     errorHandler (InternalError err) = do
       user <- getUser
