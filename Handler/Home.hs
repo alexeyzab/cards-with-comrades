@@ -4,7 +4,8 @@ import Import
 
 getHomeR :: Handler Html
 getHomeR = do
-    baseLayout "Home" Nothing [whamlet|
+    mbUser <- getUser
+    baseLayout "Home" mbUser [whamlet|
     Home!
     |]
 

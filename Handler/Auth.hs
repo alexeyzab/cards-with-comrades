@@ -112,4 +112,6 @@ postSignupR = do
     _ -> renderSignup widget
 
 getSignoutR :: Handler Html
-getSignoutR = undefined
+getSignoutR = do
+  deleteLoginData
+  redirect HomeR
