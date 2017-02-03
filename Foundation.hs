@@ -31,6 +31,10 @@ mkYesodData "App" [parseRoutes|
 /login      LoginR   GET POST
 /signup     SignupR  GET POST
 /signout    SignoutR GET
+
+/admin      AdminR       GET
+/admin/deck AdminDeckR   GET POST
+/admin/card AdminCardR   GET POST
 |]
 
 htmlOnly :: (MonadHandler m) => m Html -> m TypedContent
@@ -68,13 +72,19 @@ baseLayout title user content = do
 ^{content}
 |]
 
-errorFragment :: Text -> Widget
-errorFragment t =
+errorFragment' :: Maybe Text -> Text -> Widget
+errorFragment' mmsg t =
   [whamlet|
 <div .row #content>
   <div .large-8 .columns>
     <h1>#{t}
+    $maybe msg <- mmsg
+      <pre>
+        #{msg}
 |]
+
+errorFragment :: Text -> Widget
+errorFragment = errorFragment' Nothing
 
 instance Yesod App where
     approot = ApprootRequest $ \app req ->
@@ -90,7 +100,7 @@ instance Yesod App where
 
     defaultLayout widget = do
       master <- getYesod
-      mcurrentRoute <- getCurrentRoute
+      -- mcurrentRoute <- getCurrentRoute
       pc <- widgetToPageContent [whamlet|^{widget}|]
       withUrlRenderer $(hamletFile "templates/default-layout-wrapper.hamlet")
 
@@ -100,7 +110,7 @@ instance Yesod App where
 
     errorHandler (InternalError err) = do
       user <- getUser
-      htmlOnly $ baseLayout "Our bad!" user $ errorFragment "500"
+      htmlOnly $ baseLayout "Our bad!" user $ errorFragment' (Just err) "500 - dude we got an error"
 
     errorHandler (InvalidArgs _) = do
       user <- getUser
@@ -108,11 +118,11 @@ instance Yesod App where
 
     errorHandler NotAuthenticated = do
       user <- getUser
-      htmlOnly $ baseLayout "Not authenticated" user $ errorFragment "401"
+      htmlOnly $ baseLayout "Not authenticated" user $ errorFragment' (Just "You are not logged in") "401"
 
-    errorHandler (PermissionDenied _) = do
+    errorHandler (PermissionDenied msg) = do
       user <- getUser
-      htmlOnly $ baseLayout "Permission denied" user $ errorFragment "403"
+      htmlOnly $ baseLayout "Permission denied" user $ errorFragment' (Just msg) "403"
 
     errorHandler (BadMethod _) = do
       user <- getUser

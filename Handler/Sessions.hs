@@ -112,3 +112,16 @@ getUser =
     do userKey <- MaybeT $ getUserKey
        user <- MaybeT $ runDB $ get userKey
        return $ Entity userKey user
+
+requireAdmin :: (YesodLog site, YesodPersist site, YesodPersistBackend site ~ SqlBackend)
+             => HandlerT site IO (Entity User, Entity Admin)
+requireAdmin = do
+  maybeUser <- getUser
+  case maybeUser of
+    Nothing -> notAuthenticated
+    (Just user) -> do
+      maybeAdmin <- runDB $ fetchThingByField AdminAccount (entityKey user)
+      case maybeAdmin of
+        Nothing -> permissionDenied "You are not an administrator"
+        (Just admin) -> return (user, admin)
+

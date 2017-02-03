@@ -8,19 +8,6 @@ loginForm =
   (,) <$> areq textField (named "email" (placeheld "Email")) Nothing
       <*> areq passwordField (named "password" (placeheld "Password")) Nothing
 
-  -- renderAbide $
-  -- (,,,) <$> areq (abideEmailField Nothing "email address" Nothing) (named "email" (placeheld "Email")) Nothing
-  --       <*> areq (abidePasswordField Nothing "work current-password" Nothing Nothing) (named "password" (placeheld "Password")) Nothing
-
-      -- <div class="name-field">
-      --   <label>Your name <small>required</small>
-      --     <input type="text" required pattern="[a-zA-Z]+">
-      --   <small class="error">Name is required and must be a string.</small>
-      -- <div class="email-field">
-      --   <label>Email <small>required</small>
-      --     <input type="email" required>
-      --   <small class="error">An email address is required.</small>
-
 redirectIfLoggedIn :: (RedirectUrl App r) => r -> Handler ()
 redirectIfLoggedIn r = do
   maybeUser <- getUser
@@ -28,6 +15,7 @@ redirectIfLoggedIn r = do
     Nothing -> return ()
     (Just _) -> redirect r
 
+renderLogin :: Widget -> Handler Html
 renderLogin widget = do
   baseLayout "Login" Nothing [whamlet|
 <div .row #content>
@@ -57,7 +45,7 @@ postLoginR = do
       case maybeUP of
         Nothing ->
           notFound
-        (Just ((Entity dbUserKey dbUser), (Entity _ dbPass))) -> do
+        (Just ((Entity dbUserKey _), (Entity _ dbPass))) -> do
           let success = passwordMatches (passwordHash dbPass) password
           case success of
             False -> notAuthenticated
@@ -73,6 +61,7 @@ signupForm = loginForm
   -- (,) <$> areq textField (named "email" (placeheld "Email")) Nothing
   --     <*> areq passwordField (named "password" (placeheld "Password")) Nothing
 
+renderSignup :: Widget -> Handler Html
 renderSignup widget = do
   baseLayout "Login" Nothing [whamlet|
 <div .row #content>
@@ -106,7 +95,7 @@ postSignupR = do
           renderSignup widget
         -- If not, create a user
         Nothing -> do
-          (Just (Entity dbUserKey _)) <- runDB $ createUser email password
+          (Entity dbUserKey _) <- runDB $ createUser email password
           setUserSession dbUserKey True
           redirect HomeR
     _ -> renderSignup widget

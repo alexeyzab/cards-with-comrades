@@ -20,15 +20,18 @@ library
     ghc-options: -O2 -Wall
     exposed-modules:
           Application
+          Helpers.Fixtures
           Model
           Import
           Import.NoFoundation
     other-modules:
           Foundation
+          Handler.Admin
           Handler.Auth
           Handler.Common
           Handler.Home
           Handler.Sessions
+          Helpers.Fixtures.Deck
           Helpers.Forms
           Helpers.Views
           Model.BCrypt

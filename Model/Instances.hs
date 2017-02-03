@@ -6,7 +6,6 @@ import ClassyPrelude.Yesod
 
 import Data.ByteString.Char8 as B8
 import Database.Persist.Sql
-import Database.Persist.Postgresql
 import           Data.UUID   (UUID)
 import qualified Data.UUID as UUID
 

@@ -102,6 +102,7 @@ library:
   source-dirs: .
   exposed-modules:
     - Application
+    - Helpers.Fixtures
     - Model
     - Import
     - Import.NoFoundation
