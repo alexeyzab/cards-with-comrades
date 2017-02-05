@@ -118,6 +118,12 @@ createCard newCard = do
   cardKey <- insert $ newCard
   return (Entity cardKey newCard)
 
+createDeck :: Text -> DB (Entity Deck)
+createDeck t = do
+  let newDeck = Deck t
+  deckKey <- insert $ newDeck
+  return (Entity deckKey newDeck)
+
 dumpMigration :: DB ()
 dumpMigration = printMigration migrateAll
 

@@ -15,15 +15,15 @@ newtype CardFixtures =
   CardFixtures { allCardsF :: [Entity Card] }
   deriving (Eq, Show)
 
--- newtype DeckFixtures =
---   DeckFixtures { allDecksF :: [Entity Deck] }
---   deriving (Eq, Show)
+newtype DeckFixtures =
+  DeckFixtures { allDecksF :: [Entity Deck] }
+  deriving (Eq, Show)
 
 data Fixtures =
   Fixtures { userF     :: UserFixtures
            , adminF    :: AdminFixtures
            , cardF     :: CardFixtures
-           -- , deckF     :: DeckFixtures
+           , deckF     :: DeckFixtures
            }
   deriving (Eq, Show)
 
@@ -56,6 +56,16 @@ makeCard = createCard
 makeCards :: [Card] -> DB [Entity Card]
 makeCards = traverse makeCard
 
+deck1, deck2 :: Text
+deck1 = "Deck 1"
+deck2 = "Deck 2"
+
+makeDeck :: Text -> DB (Entity Deck)
+makeDeck = createDeck
+
+makeDecks :: [Text] -> DB [Entity Deck]
+makeDecks = traverse makeDeck
+
 {-# INLINABLE unsafeIdx #-}
 unsafeIdx :: (MonoFoldable c) => c -> Integer -> Element c
 unsafeIdx xs n
@@ -71,6 +81,7 @@ insertFixtures = do
   let (Right questionCards) = decodeQuestions questionsFile
       (Right answerCards) = decodeAnswers answersFile
   allCardsF <- makeCards $ toList . asVector $ map questionCard questionCards ++ map answerCard answerCards
+  allDecksF <- makeDecks [deck1, deck2]
   allUsersF <- makeAccounts
   let chris = unsafeIdx allUsersF 0
       alexey = unsafeIdx allUsersF 1
@@ -78,5 +89,5 @@ insertFixtures = do
   let userF = UserFixtures {..}
       adminF = AdminFixtures {..}
       cardF = CardFixtures {..}
-      -- deckF = DeckFixtures {..}
+      deckF = DeckFixtures {..}
   return Fixtures {..}
