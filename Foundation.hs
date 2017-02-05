@@ -83,6 +83,16 @@ errorFragment' mmsg t =
         #{msg}
 |]
 
+errorFragment'' :: Maybe Text -> Text -> Widget
+errorFragment'' mmsg t =
+  [whamlet|
+<div #error-block .container-lg>
+  <h1 .error-title>#{t}
+  $maybe msg <- mmsg
+    <h2 .error-explanation>
+      #{msg}
+|]
+
 errorFragment :: Text -> Widget
 errorFragment = errorFragment' Nothing
 
@@ -106,27 +116,27 @@ instance Yesod App where
 
     errorHandler NotFound = do
       user <- getUser
-      htmlOnly $ baseLayout "Not found!" user $ errorFragment "404"
+      htmlOnly $ baseLayout "Not found!" user $ errorFragment'' (Just "Sorry, but the page you were looking for could not be found") "404 - Page not found"
 
     errorHandler (InternalError err) = do
       user <- getUser
-      htmlOnly $ baseLayout "Our bad!" user $ errorFragment' (Just err) "500 - dude we got an error"
+      htmlOnly $ baseLayout "Our bad!" user $ errorFragment'' (Just err) "500 - Internal Server Error"
 
     errorHandler (InvalidArgs _) = do
       user <- getUser
-      htmlOnly $ baseLayout "Invalid request" user $ errorFragment "400"
+      htmlOnly $ baseLayout "Invalid request" user $ errorFragment "400 - Bad Request"
 
     errorHandler NotAuthenticated = do
       user <- getUser
-      htmlOnly $ baseLayout "Not authenticated" user $ errorFragment' (Just "You are not logged in") "401"
+      htmlOnly $ baseLayout "Not authenticated" user $ errorFragment'' (Just "You are not logged in") "401 - Unauthorized"
 
     errorHandler (PermissionDenied msg) = do
       user <- getUser
-      htmlOnly $ baseLayout "Permission denied" user $ errorFragment' (Just msg) "403"
+      htmlOnly $ baseLayout "Permission denied" user $ errorFragment'' (Just msg) "403 - Forbidden"
 
     errorHandler (BadMethod _) = do
       user <- getUser
-      htmlOnly $ baseLayout "Bad method for request" user $ errorFragment "400"
+      htmlOnly $ baseLayout "Bad method for request" user $ errorFragment "400 - Bad Request"
 
     addStaticContent ext mime content = do
         master <- getYesod
