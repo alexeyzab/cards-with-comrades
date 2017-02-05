@@ -1,6 +1,7 @@
 module Helpers.Fixtures where
 
 import Import
+import Helpers.Fixtures.Deck (decodeAnswers, decodeQuestions, Question(..), Answer(..))
 
 newtype UserFixtures =
   UserFixtures { allUsersF :: [Entity User] }
@@ -10,9 +11,9 @@ newtype AdminFixtures =
   AdminFixtures { allAdminsF :: [Entity Admin] }
   deriving (Eq, Show)
 
--- newtype CardFixtures =
---   CardFixtures { allCardsF :: [Entity Card] }
---   deriving (Eq, Show)
+newtype CardFixtures =
+  CardFixtures { allCardsF :: [Entity Card] }
+  deriving (Eq, Show)
 
 -- newtype DeckFixtures =
 --   DeckFixtures { allDecksF :: [Entity Deck] }
@@ -21,7 +22,7 @@ newtype AdminFixtures =
 data Fixtures =
   Fixtures { userF     :: UserFixtures
            , adminF    :: AdminFixtures
-           -- , cardF     :: CardFixtures
+           , cardF     :: CardFixtures
            -- , deckF     :: DeckFixtures
            }
   deriving (Eq, Show)
@@ -49,6 +50,12 @@ makeAdmin = createAdmin
 makeAdmins :: [Key User] -> DB [Entity Admin]
 makeAdmins = traverse makeAdmin
 
+makeCard :: Card -> DB (Entity Card)
+makeCard = createCard
+
+makeCards :: [Card] -> DB [Entity Card]
+makeCards = traverse makeCard
+
 {-# INLINABLE unsafeIdx #-}
 unsafeIdx :: (MonoFoldable c) => c -> Integer -> Element c
 unsafeIdx xs n
@@ -59,12 +66,17 @@ unsafeIdx xs n
 
 insertFixtures :: DB Fixtures
 insertFixtures = do
+  questionsFile <- readFile "decks/cah-black.csv"
+  answersFile <- readFile "decks/cah-white.csv"
+  let (Right questionCards) = decodeQuestions questionsFile
+      (Right answerCards) = decodeAnswers answersFile
+  allCardsF <- makeCards $ toList . asVector $ map questionCard questionCards ++ map answerCard answerCards
   allUsersF <- makeAccounts
   let chris = unsafeIdx allUsersF 0
       alexey = unsafeIdx allUsersF 1
   allAdminsF <- makeAdmins [entityKey chris, entityKey alexey]
   let userF = UserFixtures {..}
       adminF = AdminFixtures {..}
-      -- cardF = CardFixtures {..}
+      cardF = CardFixtures {..}
       -- deckF = DeckFixtures {..}
   return Fixtures {..}

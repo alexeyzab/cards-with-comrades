@@ -113,6 +113,11 @@ createAdmin userKey = do
   adminKey <- insert $ newAdmin
   return (Entity adminKey newAdmin)
 
+createCard :: Card -> DB (Entity Card)
+createCard newCard = do
+  cardKey <- insert $ newCard
+  return (Entity cardKey newCard)
+
 dumpMigration :: DB ()
 dumpMigration = printMigration migrateAll
 
