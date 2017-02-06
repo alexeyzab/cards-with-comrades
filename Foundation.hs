@@ -75,17 +75,6 @@ baseLayout title user content = do
 errorFragment' :: Maybe Text -> Text -> Widget
 errorFragment' mmsg t =
   [whamlet|
-<div .row #content>
-  <div .large-8 .columns>
-    <h1>#{t}
-    $maybe msg <- mmsg
-      <pre>
-        #{msg}
-|]
-
-errorFragment'' :: Maybe Text -> Text -> Widget
-errorFragment'' mmsg t =
-  [whamlet|
 <div #error-block .container-lg>
   <h1 .error-title>#{t}
   $maybe msg <- mmsg
@@ -116,11 +105,11 @@ instance Yesod App where
 
     errorHandler NotFound = do
       user <- getUser
-      htmlOnly $ baseLayout "Not found!" user $ errorFragment'' (Just "Sorry, but the page you were looking for could not be found") "404 - Page not found"
+      htmlOnly $ baseLayout "Not found!" user $ errorFragment' (Just "Sorry, but the page you were looking for could not be found") "404 - Page not found"
 
     errorHandler (InternalError err) = do
       user <- getUser
-      htmlOnly $ baseLayout "Our bad!" user $ errorFragment'' (Just err) "500 - Internal Server Error"
+      htmlOnly $ baseLayout "Our bad!" user $ errorFragment' (Just err) "500 - Internal Server Error"
 
     errorHandler (InvalidArgs _) = do
       user <- getUser
@@ -128,11 +117,11 @@ instance Yesod App where
 
     errorHandler NotAuthenticated = do
       user <- getUser
-      htmlOnly $ baseLayout "Not authenticated" user $ errorFragment'' (Just "You are not logged in") "401 - Unauthorized"
+      htmlOnly $ baseLayout "Not authenticated" user $ errorFragment' (Just "You are not logged in") "401 - Unauthorized"
 
     errorHandler (PermissionDenied msg) = do
       user <- getUser
-      htmlOnly $ baseLayout "Permission denied" user $ errorFragment'' (Just msg) "403 - Forbidden"
+      htmlOnly $ baseLayout "Permission denied" user $ errorFragment' (Just msg) "403 - Forbidden"
 
     errorHandler (BadMethod _) = do
       user <- getUser
