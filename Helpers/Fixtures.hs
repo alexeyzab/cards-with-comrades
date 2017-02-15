@@ -66,6 +66,12 @@ makeDeck = createDeck
 makeDecks :: [Text] -> DB [Entity Deck]
 makeDecks = traverse makeDeck
 
+makeDeckCard :: Key Deck -> Key Card -> DB (Entity DeckCard)
+makeDeckCard = createDeckCard
+
+makeDeckCards :: [Key Card] -> Key Deck -> DB [Entity DeckCard]
+makeDeckCards xs d = traverse (makeDeckCard d) xs
+
 {-# INLINABLE unsafeIdx #-}
 unsafeIdx :: (MonoFoldable c) => c -> Integer -> Element c
 unsafeIdx xs n
@@ -81,7 +87,10 @@ insertFixtures = do
   let (Right questionCards) = decodeQuestions questionsFile
       (Right answerCards) = decodeAnswers answersFile
   allCardsF <- makeCards $ toList . asVector $ map questionCard questionCards ++ map answerCard answerCards
-  allDecksF <- makeDecks [deck1, deck2]
+  let listOfCardIds = map entityKey allCardsF
+  deck <- makeDeck deck1
+  allDecksF <- makeDecks [deck2]
+  allDeckCardsF <- makeDeckCards listOfCardIds (entityKey deck)
   allUsersF <- makeAccounts
   let chris = unsafeIdx allUsersF 0
       alexey = unsafeIdx allUsersF 1
