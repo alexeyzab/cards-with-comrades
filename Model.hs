@@ -124,6 +124,12 @@ createDeck t = do
   deckKey <- insert $ newDeck
   return (Entity deckKey newDeck)
 
+createDeckCard :: Key Deck -> Key Card -> DB (Entity DeckCard)
+createDeckCard d c = do
+  let newDeckCard = DeckCard c d
+  deckCardKey <- insert $ newDeckCard
+  return (Entity deckCardKey newDeckCard)
+
 dumpMigration :: DB ()
 dumpMigration = printMigration migrateAll
 
