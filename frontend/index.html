@@ -1,21 +1,30 @@
 <!DOCTYPE HTML>
 <html>
-
-<head>
-  <meta charset="UTF-8">
-  <title>Cards</title>
-  <script type="text/javascript" src="elm.js"></script>
-  <link rel="stylesheet" href="style.css">
-</head>
-
+  <head>
+    <link rel="stylesheet" href="index.css">
+    <script type="text/javascript" src="src/Main.js"></script>
+  </head>
 <body>
-  <div id="cards-app">
+
+<p>Drag the cards onto the board:</p>
+
+<!-- <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div> -->
+
+<!-- <img id="drag1" src="img_logo.gif" draggable="true" -->
+<!--      ondragstart="drag(event)" width="336" height="69"> -->
+
+Board:
+<div id="board" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+
+Cards:
+<div id="cards-container">
+  <div class="card" draggable="true" ondragstart="drag(event)">
+    <p>Hello</p>
   </div>
+  <div class="card" draggable="true" ondragstart="drag(event)">
+    <p>Hi</p>
+  </div>
+</div>
+
 </body>
-
-<script type="text/javascript">
-var node = document.getElementById('cards-app');
-var cards = Elm.Cards.embed(node);
-</script>
-
 </html>
