@@ -1,0 +1,21 @@
+#board {
+    width: 450px;
+    height: 450px;
+    border: 1px solid black;
+}
+
+#cards-container {
+    margin-top: 25px;
+    width: 250px;
+    height: 250px;
+    padding: 25px;
+    border: 1px solid black;
+}
+
+.card {
+    background-color: gray;
+    margin: 15px;
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+}
