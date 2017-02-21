@@ -20,12 +20,17 @@
 -- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 -- SOFTWARE.
 
-module Sortable where
+module DOMHelper where
 
 import Import
 
--- | Install 'Sortable' on the given DOM element. The second argument is
--- | an event handler that is called if the list is modified.
-foreign import installSortable :: forall eff. Element
-                               -> (Eff (dom :: DOM | eff) Unit)
-                               -> Eff (dom :: DOM | eff) Unit
+getDocument :: forall eff. Eff (dom :: DOM | eff) Document
+getDocument = window >>= document <#> htmlDocumentToDocument
+
+getElementById' :: forall eff. String
+                -> Document
+                -> Eff (dom :: DOM | eff) (Maybe Element)
+getElementById' id doc = do
+  let docNode = documentToNonElementParentNode doc
+  nullableEl <- getElementById (ElementId id) docNode
+  pure $ toMaybe nullableEl

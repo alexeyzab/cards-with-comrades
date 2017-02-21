@@ -1,18 +1,18 @@
 {
-    "name": "frontend",
-    "ignore": [
-        "**/.*",
-        "node_modules",
-        "bower_components",
-        "output"
-    ],
-    "dependencies": {
-        "purescript-prelude": "^2.4.0",
-        "purescript-console": "^2.0.0",
-        "purescript-dom": "^1.2.0",
-        "Sortable": "RubaXa/Sortable#~1.4.0"
-    },
-    "devDependencies": {
-        "purescript-psci-support": "^2.0.0"
-    }
+  "name": "frontend",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "output"
+  ],
+  "dependencies": {
+    "purescript-prelude": "^2.4.0",
+    "purescript-console": "^2.0.0",
+    "purescript-dom": "^1.2.0",
+    "Sortable": "RubaXa/Sortable#~1.4.0"
+  },
+  "devDependencies": {
+    "purescript-psci-support": "^2.0.0"
+  }
 }

@@ -1,13 +1,18 @@
 module Main where
 
-import Prelude
-import Control.Monad.Eff
-import Control.Monad.Eff.Console
-import DOM.Event.Types (Event ())
+import Import
+import DOMHelper
+import Sortable (installSortable)
 
-foreign import allowDrop :: Event -> Event
-foreign import drag :: Event -> Event
-foreign import drop :: Event -> Event
+type App = forall eff. Eff (dom :: DOM, console :: CONSOLE) Unit
 
+-- | Unsafe version of `fromJust`
+unsafeFromJust :: forall a. Maybe a -> a
+unsafeFromJust = unsafePartial fromJust
+
+main :: App
 main = do
-  log "Hello sailor!"
+    doc <- getDocument
+    -- install sortable
+    ulAvailable <- unsafeFromJust <$> getElementById' "player-hand" doc
+    installSortable ulAvailable (pure unit)

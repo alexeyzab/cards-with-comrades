@@ -2,7 +2,6 @@
 <html>
   <head>
     <link rel="stylesheet" href="index.css">
-    <script type="text/javascript" src="output/index.js"></script>
   </head>
 <body>
 
@@ -14,17 +13,22 @@
 <!--      ondragstart="drag(event)" width="336" height="69"> -->
 
 Board:
-<div id="board" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+<!-- <div id="board" ondrop="drop(event)" ondragover="allowDrop(event)"></div> -->
+<div id="board"></div>
 
 Cards:
 <div id="cards-container">
-  <div class="card" draggable="true" ondragstart="drag(event)">
-    <p>Hello</p>
-  </div>
-  <div class="card" draggable="true" ondragstart="drag(event)">
-    <p>Hi</p>
-  </div>
+  <ul id="player-hand">
+    <li>Example card</li>
+  </ul>
+  <!-- <div class="card" draggable="true" ondragstart="drag(event)"> -->
+  <!--   <p>Hello</p> -->
+  <!-- </div> -->
+  <!-- <div class="card" draggable="true" ondragstart="drag(event)"> -->
+  <!--   <p>Hi</p> -->
+  <!-- </div> -->
 </div>
 
+<script type="text/javascript" src="dist/index.js"></script>
 </body>
 </html>

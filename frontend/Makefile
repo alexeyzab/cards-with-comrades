@@ -1,5 +1,9 @@
 build:
-	pulp browserify --to output/index.js
+	gulp
 
 prod-build:
-	pulp build --to output/index.js
+	gulp prod
+
+deps:
+	bower install
+	npm install

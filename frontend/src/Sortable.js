@@ -20,15 +20,20 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+// var Sortable = require("../../bower_components/Sortable");
+
 exports.installSortable = function (el) {
-  return function(sortHandler) {
-    return function() {
-      new Sortable(el, {
-        group: 'function-lists',
-        ghostClass: 'sortable-ghost',
-        animation: 150,
-        onSort: sortHandler
-      });
+    return function(sortHandler) {
+        return function() {
+            // debugger;
+            console.log(Sortable);
+            console.log(Sortable);
+            new Sortable(el, {
+                group: 'function-lists',
+                ghostClass: 'sortable-ghost',
+                animation: 150,
+                onSort: sortHandler
+            });
+        };
     };
-  };
 };
