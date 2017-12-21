@@ -52,14 +52,14 @@ parseQuestion t = Question <$> parseQuestion' t
 parseAnswer :: Text -> Either String Answer
 parseAnswer t = return $ Answer $ Card True t Nothing Nothing Nothing Nothing Nothing Nothing Nothing Nothing
 
-decodeQuestions :: LByteString -> Either String (Vector Question)
+decodeQuestions :: ByteString -> Either String (Vector Question)
 decodeQuestions bs = do
   let t = decodeUtf8 bs
-      rows = T.lines (toStrict t)
+      rows = T.lines t
   fromList <$> traverse parseQuestion rows
 
-decodeAnswers :: LByteString -> Either String (Vector Answer)
+decodeAnswers :: ByteString -> Either String (Vector Answer)
 decodeAnswers bs = do
   let t = decodeUtf8 bs
-      rows = T.lines (toStrict t)
+      rows = T.lines t
   fromList <$> traverse parseAnswer rows
