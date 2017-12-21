@@ -1,15 +1,7 @@
-resolver: lts-7.16
-compiler: ghc-8.0.2
+resolver: lts-10.0
 
 packages:
 - '.'
-
-extra-deps:
-  - esqueleto-2.5.1
-  - persistent-2.6
-  - persistent-postgresql-2.6
-  - persistent-template-2.5.1.6
-  - yesod-markdown-0.11.1
 
 flags: {}
 

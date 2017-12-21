@@ -1,6 +1,8 @@
--- This file has been generated from package.yaml by hpack version 0.15.0.
+-- This file has been generated from package.yaml by hpack version 0.20.0.
 --
 -- see: https://github.com/sol/hpack
+--
+-- hash: 0f04d1ef6d77fed7ab3b3224e6a5263aef6a1c861778406c6085e8d0e79efffb
 
 name:              cards-with-comrades
 version:           0.0.1
@@ -15,7 +17,7 @@ flag library-only
 
 library
     hs-source-dirs:
-          .
+          ./.
     default-extensions: BangPatterns ConstraintKinds DataKinds DeriveDataTypeable DeriveGeneric EmptyDataDecls FlexibleContexts FlexibleInstances GADTs GeneralizedNewtypeDeriving MultiParamTypeClasses NoImplicitPrelude NoMonomorphismRestriction OverloadedStrings QuasiQuotes RankNTypes RecordWildCards ScopedTypeVariables TemplateHaskell TupleSections TypeFamilies TypeOperators ViewPatterns
     ghc-options: -O2 -Wall
     exposed-modules:
@@ -42,213 +44,212 @@ library
           Paths_cards_with_comrades
     default-language: Haskell2010
     build-depends:
-          aeson                         >= 0.11       && < 0.12
-        , base                          >= 4.8        && < 5.0
-        , bcrypt                        >= 0.0.8      && < 0.0.11
-        , blaze-builder                 >= 0.4        && < 0.5
-        , blaze-html                    >= 0.8        && < 0.9
-        , blaze-markup                  >= 0.7        && < 0.8
-        , bytestring                    >= 0.10.4.1   && < 0.11
+          aeson >=0.11 && <1.3
+        , base >=4.8 && <5.0
+        , bcrypt >=0.0.8 && <0.0.11
+        , blaze-builder >=0.4 && <0.5
+        , blaze-html >=0.8 && <0.10
+        , blaze-markup >=0.7 && <0.9
+        , bytestring >=0.10.4.1 && <0.11
         , case-insensitive
-        , cereal                        >= 0.5        && < 0.6
-        , classy-prelude                >= 0.12       && < 1.1
-        , classy-prelude-conduit        >= 0.10.2
-        , classy-prelude-yesod          >= 0.10.2
-        , comonad                       >= 4          && < 6
-        , containers                    >= 0.5        && < 0.6
-        , cryptonite                    >= 0.15       && < 1.0
+        , cereal >=0.5 && <0.6
+        , classy-prelude >=0.12 && <1.4
+        , classy-prelude-conduit >=0.10.2
+        , classy-prelude-yesod >=0.10.2
+        , comonad >=4 && <6
+        , containers >=0.5 && <0.6
+        , cryptonite >=0.15 && <1.0
         , data-default
-        , directory                     >= 1.2        && < 1.3
-        , either                        >= 4.4        && < 4.5
-        , email-validate                >= 2.2        && < 2.3
+        , directory >=1.2 && <1.4
+        , either >=4.4 && <4.6
+        , email-validate >=2.2 && <2.4
         , errors
         , esqueleto
-        , exceptions                    >= 0.8        && < 0.9
-        , fast-logger                   >= 2.4        && < 2.5
+        , exceptions >=0.8 && <0.9
+        , fast-logger >=2.4 && <2.5
         , file-embed
-        , filepath                      >= 1.4        && < 1.5
-        , foreign-store                 >= 0.2        && < 0.4
+        , filepath >=1.4 && <1.5
+        , foreign-store >=0.2 && <0.4
+        , hjsmin >=0.1 && <0.3
         , hscolour
         , http-api-data
-        , hjsmin                        >= 0.1        && < 0.3
-        , lens                          >= 4.11       && < 4.16
-        , lens-aeson                    >= 1.0        && < 1.1
-        , monad-control                 >= 1.0        && < 1.1
-        , monad-logger                  >= 0.3        && < 0.4
-        , mtl                           >= 2.2        && < 3.0
-        , network-uri                   >= 2.6        && < 2.7
-        , pandoc                        >= 1.17       && < 1.20
-        , persistent                    >= 2.6        && < 2.7
-        , persistent-postgresql         >= 2.6        && < 2.7
-        , persistent-template           >= 2.5        && < 2.6
-        , safe                          >= 0.3        && < 0.4
-        , semigroups                    >= 0.18       && < 0.19
-        , shakespeare                   >= 2.0        && < 2.1
-        , template-haskell              >= 2.10       && < 2.12
-        , text                          >= 1.2        && < 2.0
-        , time                          >= 1.5        && < 1.7
-        , transformers                  >= 0.4        && < 0.6
-        , unix                          >= 2.7        && < 2.8
+        , lens >=4.11 && <4.16
+        , lens-aeson >=1.0 && <1.1
+        , monad-control >=1.0 && <1.1
+        , monad-logger >=0.3 && <0.4
+        , mtl >=2.2 && <3.0
+        , network-uri >=2.6 && <2.7
+        , pandoc >=2.0 && <2.1
+        , persistent >=2.6 && <2.8
+        , persistent-postgresql >=2.6 && <2.7
+        , persistent-template >=2.5 && <2.6
+        , safe >=0.3 && <0.4
+        , semigroups >=0.18 && <0.19
+        , shakespeare >=2.0 && <2.1
+        , template-haskell >=2.10 && <2.13
+        , text >=1.2 && <2.0
+        , time >=1.5 && <1.9
+        , transformers >=0.4 && <0.6
+        , unix >=2.7 && <2.8
         , unordered-containers
-        , uuid                          >= 1.3        && < 1.4
-        , uuid-types                    >= 1.0        && < 2.0
+        , uuid >=1.3 && <1.4
+        , uuid-types >=1.0 && <2.0
         , vector
-        , wai                           >= 3.2        && < 4.0
-        , wai-extra                     >= 3.0        && < 4.0
-        , warp                          >= 3.2        && < 4.0
-        , yaml                          >= 0.8        && < 0.9
-        , yesod                         >= 1.4.3      && < 1.5
-        , yesod-core                    >= 1.4.17     && < 1.5
-        , yesod-auth                    >= 1.4.0      && < 1.5
-        , yesod-static                  >= 1.4.0.3    && < 1.6
-        , yesod-form                    >= 1.4.0      && < 1.5
+        , wai >=3.2 && <4.0
+        , wai-extra >=3.0 && <4.0
+        , warp >=3.2 && <4.0
+        , yaml >=0.8 && <0.9
+        , yesod >=1.4.3 && <1.5
+        , yesod-auth >=1.4.0 && <1.5
+        , yesod-core >=1.4.17 && <1.5
+        , yesod-form >=1.4.0 && <1.5
+        , yesod-static >=1.4.0.3 && <1.6
 
 executable cards-with-comrades
     main-is: Main.hs
     hs-source-dirs:
-          app
+          apps
     default-extensions: BangPatterns ConstraintKinds DataKinds DeriveDataTypeable DeriveGeneric EmptyDataDecls FlexibleContexts FlexibleInstances GADTs GeneralizedNewtypeDeriving MultiParamTypeClasses NoImplicitPrelude NoMonomorphismRestriction OverloadedStrings QuasiQuotes RankNTypes RecordWildCards ScopedTypeVariables TemplateHaskell TupleSections TypeFamilies TypeOperators ViewPatterns
     ghc-options: -O2 -Wall -threaded -rtsopts -with-rtsopts=-N
     build-depends:
-          aeson                         >= 0.11       && < 0.12
-        , base                          >= 4.8        && < 5.0
-        , bcrypt                        >= 0.0.8      && < 0.0.11
-        , blaze-builder                 >= 0.4        && < 0.5
-        , blaze-html                    >= 0.8        && < 0.9
-        , blaze-markup                  >= 0.7        && < 0.8
-        , bytestring                    >= 0.10.4.1   && < 0.11
+          aeson >=0.11 && <1.3
+        , base >=4.8 && <5.0
+        , bcrypt >=0.0.8 && <0.0.11
+        , blaze-builder >=0.4 && <0.5
+        , blaze-html >=0.8 && <0.10
+        , blaze-markup >=0.7 && <0.9
+        , bytestring >=0.10.4.1 && <0.11
+        , cards-with-comrades
         , case-insensitive
-        , cereal                        >= 0.5        && < 0.6
-        , classy-prelude                >= 0.12       && < 1.1
-        , classy-prelude-conduit        >= 0.10.2
-        , classy-prelude-yesod          >= 0.10.2
-        , comonad                       >= 4          && < 6
-        , containers                    >= 0.5        && < 0.6
-        , cryptonite                    >= 0.15       && < 1.0
+        , cereal >=0.5 && <0.6
+        , classy-prelude >=0.12 && <1.4
+        , classy-prelude-conduit >=0.10.2
+        , classy-prelude-yesod >=0.10.2
+        , comonad >=4 && <6
+        , containers >=0.5 && <0.6
+        , cryptonite >=0.15 && <1.0
         , data-default
-        , directory                     >= 1.2        && < 1.3
-        , either                        >= 4.4        && < 4.5
-        , email-validate                >= 2.2        && < 2.3
+        , directory >=1.2 && <1.4
+        , either >=4.4 && <4.6
+        , email-validate >=2.2 && <2.4
         , errors
         , esqueleto
-        , exceptions                    >= 0.8        && < 0.9
-        , fast-logger                   >= 2.4        && < 2.5
+        , exceptions >=0.8 && <0.9
+        , fast-logger >=2.4 && <2.5
         , file-embed
-        , filepath                      >= 1.4        && < 1.5
-        , foreign-store                 >= 0.2        && < 0.4
+        , filepath >=1.4 && <1.5
+        , foreign-store >=0.2 && <0.4
+        , hjsmin >=0.1 && <0.3
         , hscolour
         , http-api-data
-        , hjsmin                        >= 0.1        && < 0.3
-        , lens                          >= 4.11       && < 4.16
-        , lens-aeson                    >= 1.0        && < 1.1
-        , monad-control                 >= 1.0        && < 1.1
-        , monad-logger                  >= 0.3        && < 0.4
-        , mtl                           >= 2.2        && < 3.0
-        , network-uri                   >= 2.6        && < 2.7
-        , pandoc                        >= 1.17       && < 1.20
-        , persistent                    >= 2.6        && < 2.7
-        , persistent-postgresql         >= 2.6        && < 2.7
-        , persistent-template           >= 2.5        && < 2.6
-        , safe                          >= 0.3        && < 0.4
-        , semigroups                    >= 0.18       && < 0.19
-        , shakespeare                   >= 2.0        && < 2.1
-        , template-haskell              >= 2.10       && < 2.12
-        , text                          >= 1.2        && < 2.0
-        , time                          >= 1.5        && < 1.7
-        , transformers                  >= 0.4        && < 0.6
-        , unix                          >= 2.7        && < 2.8
+        , lens >=4.11 && <4.16
+        , lens-aeson >=1.0 && <1.1
+        , monad-control >=1.0 && <1.1
+        , monad-logger >=0.3 && <0.4
+        , mtl >=2.2 && <3.0
+        , network-uri >=2.6 && <2.7
+        , pandoc >=2.0 && <2.1
+        , persistent >=2.6 && <2.8
+        , persistent-postgresql >=2.6 && <2.7
+        , persistent-template >=2.5 && <2.6
+        , safe >=0.3 && <0.4
+        , semigroups >=0.18 && <0.19
+        , shakespeare >=2.0 && <2.1
+        , template-haskell >=2.10 && <2.13
+        , text >=1.2 && <2.0
+        , time >=1.5 && <1.9
+        , transformers >=0.4 && <0.6
+        , unix >=2.7 && <2.8
         , unordered-containers
-        , uuid                          >= 1.3        && < 1.4
-        , uuid-types                    >= 1.0        && < 2.0
+        , uuid >=1.3 && <1.4
+        , uuid-types >=1.0 && <2.0
         , vector
-        , wai                           >= 3.2        && < 4.0
-        , wai-extra                     >= 3.0        && < 4.0
-        , warp                          >= 3.2        && < 4.0
-        , yaml                          >= 0.8        && < 0.9
-        , yesod                         >= 1.4.3      && < 1.5
-        , yesod-core                    >= 1.4.17     && < 1.5
-        , yesod-auth                    >= 1.4.0      && < 1.5
-        , yesod-static                  >= 1.4.0.3    && < 1.6
-        , yesod-form                    >= 1.4.0      && < 1.5
-        , cards-with-comrades
+        , wai >=3.2 && <4.0
+        , wai-extra >=3.0 && <4.0
+        , warp >=3.2 && <4.0
+        , yaml >=0.8 && <0.9
+        , yesod >=1.4.3 && <1.5
+        , yesod-auth >=1.4.0 && <1.5
+        , yesod-core >=1.4.17 && <1.5
+        , yesod-form >=1.4.0 && <1.5
+        , yesod-static >=1.4.0.3 && <1.6
     if flag(library-only)
         buildable: False
     other-modules:
           DevelMain
-          Migration
+          Paths_cards_with_comrades
     default-language: Haskell2010
 
 executable migration
-    main-is: Migration.hs
+    main-is: Main.hs
     hs-source-dirs:
-          app
+          apps/migration
     default-extensions: BangPatterns ConstraintKinds DataKinds DeriveDataTypeable DeriveGeneric EmptyDataDecls FlexibleContexts FlexibleInstances GADTs GeneralizedNewtypeDeriving MultiParamTypeClasses NoImplicitPrelude NoMonomorphismRestriction OverloadedStrings QuasiQuotes RankNTypes RecordWildCards ScopedTypeVariables TemplateHaskell TupleSections TypeFamilies TypeOperators ViewPatterns
     ghc-options: -O2 -Wall -threaded -rtsopts -with-rtsopts=-N
     build-depends:
-          aeson                         >= 0.11       && < 0.12
-        , base                          >= 4.8        && < 5.0
-        , bcrypt                        >= 0.0.8      && < 0.0.11
-        , blaze-builder                 >= 0.4        && < 0.5
-        , blaze-html                    >= 0.8        && < 0.9
-        , blaze-markup                  >= 0.7        && < 0.8
-        , bytestring                    >= 0.10.4.1   && < 0.11
+          aeson >=0.11 && <1.3
+        , base >=4.8 && <5.0
+        , bcrypt >=0.0.8 && <0.0.11
+        , blaze-builder >=0.4 && <0.5
+        , blaze-html >=0.8 && <0.10
+        , blaze-markup >=0.7 && <0.9
+        , bytestring >=0.10.4.1 && <0.11
+        , cards-with-comrades
         , case-insensitive
-        , cereal                        >= 0.5        && < 0.6
-        , classy-prelude                >= 0.12       && < 1.1
-        , classy-prelude-conduit        >= 0.10.2
-        , classy-prelude-yesod          >= 0.10.2
-        , comonad                       >= 4          && < 6
-        , containers                    >= 0.5        && < 0.6
-        , cryptonite                    >= 0.15       && < 1.0
+        , cereal >=0.5 && <0.6
+        , classy-prelude >=0.12 && <1.4
+        , classy-prelude-conduit >=0.10.2
+        , classy-prelude-yesod >=0.10.2
+        , comonad >=4 && <6
+        , containers >=0.5 && <0.6
+        , cryptonite >=0.15 && <1.0
         , data-default
-        , directory                     >= 1.2        && < 1.3
-        , either                        >= 4.4        && < 4.5
-        , email-validate                >= 2.2        && < 2.3
+        , directory >=1.2 && <1.4
+        , either >=4.4 && <4.6
+        , email-validate >=2.2 && <2.4
         , errors
         , esqueleto
-        , exceptions                    >= 0.8        && < 0.9
-        , fast-logger                   >= 2.4        && < 2.5
+        , exceptions >=0.8 && <0.9
+        , fast-logger >=2.4 && <2.5
         , file-embed
-        , filepath                      >= 1.4        && < 1.5
-        , foreign-store                 >= 0.2        && < 0.4
+        , filepath >=1.4 && <1.5
+        , foreign-store >=0.2 && <0.4
+        , hjsmin >=0.1 && <0.3
         , hscolour
         , http-api-data
-        , hjsmin                        >= 0.1        && < 0.3
-        , lens                          >= 4.11       && < 4.16
-        , lens-aeson                    >= 1.0        && < 1.1
-        , monad-control                 >= 1.0        && < 1.1
-        , monad-logger                  >= 0.3        && < 0.4
-        , mtl                           >= 2.2        && < 3.0
-        , network-uri                   >= 2.6        && < 2.7
-        , pandoc                        >= 1.17       && < 1.20
-        , persistent                    >= 2.6        && < 2.7
-        , persistent-postgresql         >= 2.6        && < 2.7
-        , persistent-template           >= 2.5        && < 2.6
-        , safe                          >= 0.3        && < 0.4
-        , semigroups                    >= 0.18       && < 0.19
-        , shakespeare                   >= 2.0        && < 2.1
-        , template-haskell              >= 2.10       && < 2.12
-        , text                          >= 1.2        && < 2.0
-        , time                          >= 1.5        && < 1.7
-        , transformers                  >= 0.4        && < 0.6
-        , unix                          >= 2.7        && < 2.8
+        , lens >=4.11 && <4.16
+        , lens-aeson >=1.0 && <1.1
+        , monad-control >=1.0 && <1.1
+        , monad-logger >=0.3 && <0.4
+        , mtl >=2.2 && <3.0
+        , network-uri >=2.6 && <2.7
+        , pandoc >=2.0 && <2.1
+        , persistent >=2.6 && <2.8
+        , persistent-postgresql >=2.6 && <2.7
+        , persistent-template >=2.5 && <2.6
+        , safe >=0.3 && <0.4
+        , semigroups >=0.18 && <0.19
+        , shakespeare >=2.0 && <2.1
+        , template-haskell >=2.10 && <2.13
+        , text >=1.2 && <2.0
+        , time >=1.5 && <1.9
+        , transformers >=0.4 && <0.6
+        , unix >=2.7 && <2.8
         , unordered-containers
-        , uuid                          >= 1.3        && < 1.4
-        , uuid-types                    >= 1.0        && < 2.0
+        , uuid >=1.3 && <1.4
+        , uuid-types >=1.0 && <2.0
         , vector
-        , wai                           >= 3.2        && < 4.0
-        , wai-extra                     >= 3.0        && < 4.0
-        , warp                          >= 3.2        && < 4.0
-        , yaml                          >= 0.8        && < 0.9
-        , yesod                         >= 1.4.3      && < 1.5
-        , yesod-core                    >= 1.4.17     && < 1.5
-        , yesod-auth                    >= 1.4.0      && < 1.5
-        , yesod-static                  >= 1.4.0.3    && < 1.6
-        , yesod-form                    >= 1.4.0      && < 1.5
-        , cards-with-comrades
+        , wai >=3.2 && <4.0
+        , wai-extra >=3.0 && <4.0
+        , warp >=3.2 && <4.0
+        , yaml >=0.8 && <0.9
+        , yesod >=1.4.3 && <1.5
+        , yesod-auth >=1.4.0 && <1.5
+        , yesod-core >=1.4.17 && <1.5
+        , yesod-form >=1.4.0 && <1.5
+        , yesod-static >=1.4.0.3 && <1.6
     if flag(library-only)
         buildable: False
     other-modules:
-          DevelMain
-          Main
+          Paths_cards_with_comrades
     default-language: Haskell2010
