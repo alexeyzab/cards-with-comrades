@@ -99,7 +99,7 @@ dependencies:
 ghc-options: -O2 -Wall
 
 library:
-  source-dirs: .
+  source-dirs: src
   exposed-modules:
     - Application
     - Helpers.Fixtures
@@ -114,7 +114,7 @@ executables:
         buildable: false
     main: Main.hs
     source-dirs:
-      - apps
+      - app
     ghc-options: -threaded -rtsopts -with-rtsopts=-N
     dependencies:
       - cards-with-comrades
@@ -124,7 +124,7 @@ executables:
         buildable: false
     main: Main.hs
     source-dirs:
-      - apps/migration
+      - app/migration
     ghc-options: -threaded -rtsopts -with-rtsopts=-N
     dependencies:
       - cards-with-comrades
