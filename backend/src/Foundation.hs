@@ -11,31 +11,9 @@ import Yesod.Default.Util   (addStaticContentExternal)
 import Yesod.Core.Types     (Logger)
 import qualified Yesod.Core.Unsafe as Unsafe
 
+import AppType
 import Handler.Sessions
-
-data App = App
-    { appSettings    :: AppSettings
-    , appStatic      :: Static -- ^ Settings for static file serving.
-    , appConnPool    :: ConnectionPool -- ^ Database connection pool.
-    , appHttpManager :: Manager
-    , appLogger      :: Logger
-    }
-
-mkYesodData "App" [parseRoutes|
-/static StaticR Static appStatic
-
-/favicon.ico FaviconR GET
-/robots.txt RobotsR GET
-
-/           HomeR    GET POST
-/login      LoginR   GET POST
-/signup     SignupR  GET POST
-/signout    SignoutR GET
-
-/admin      AdminR       GET
-/admin/deck AdminDeckR   GET POST
-/admin/card AdminCardR   GET POST
-|]
+import Routes
 
 htmlOnly :: (MonadHandler m) => m Html -> m TypedContent
 htmlOnly = selectRep . provideRep

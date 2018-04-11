@@ -2,11 +2,10 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 0f04d1ef6d77fed7ab3b3224e6a5263aef6a1c861778406c6085e8d0e79efffb
+-- hash: 7e89b28f4a7f57c28975d3adeddd037bb51a2a8d0b9558e0e8b57eeee269fa65
 
 name:              cards-with-comrades
 version:           0.0.1
-license-file:      LICENSE
 cabal-version:     >= 1.10
 build-type:        Simple
 
@@ -17,7 +16,7 @@ flag library-only
 
 library
     hs-source-dirs:
-          ./.
+          src
     default-extensions: BangPatterns ConstraintKinds DataKinds DeriveDataTypeable DeriveGeneric EmptyDataDecls FlexibleContexts FlexibleInstances GADTs GeneralizedNewtypeDeriving MultiParamTypeClasses NoImplicitPrelude NoMonomorphismRestriction OverloadedStrings QuasiQuotes RankNTypes RecordWildCards ScopedTypeVariables TemplateHaskell TupleSections TypeFamilies TypeOperators ViewPatterns
     ghc-options: -O2 -Wall
     exposed-modules:
@@ -27,6 +26,7 @@ library
           Import
           Import.NoFoundation
     other-modules:
+          AppType
           Foundation
           Handler.Admin
           Handler.Auth
@@ -39,6 +39,7 @@ library
           Model.BCrypt
           Model.Instances
           Model.Types
+          Routes
           Settings
           Settings.StaticFiles
           Paths_cards_with_comrades
@@ -108,7 +109,7 @@ library
 executable cards-with-comrades
     main-is: Main.hs
     hs-source-dirs:
-          apps
+          app
     default-extensions: BangPatterns ConstraintKinds DataKinds DeriveDataTypeable DeriveGeneric EmptyDataDecls FlexibleContexts FlexibleInstances GADTs GeneralizedNewtypeDeriving MultiParamTypeClasses NoImplicitPrelude NoMonomorphismRestriction OverloadedStrings QuasiQuotes RankNTypes RecordWildCards ScopedTypeVariables TemplateHaskell TupleSections TypeFamilies TypeOperators ViewPatterns
     ghc-options: -O2 -Wall -threaded -rtsopts -with-rtsopts=-N
     build-depends:
@@ -183,7 +184,7 @@ executable cards-with-comrades
 executable migration
     main-is: Main.hs
     hs-source-dirs:
-          apps/migration
+          app/migration
     default-extensions: BangPatterns ConstraintKinds DataKinds DeriveDataTypeable DeriveGeneric EmptyDataDecls FlexibleContexts FlexibleInstances GADTs GeneralizedNewtypeDeriving MultiParamTypeClasses NoImplicitPrelude NoMonomorphismRestriction OverloadedStrings QuasiQuotes RankNTypes RecordWildCards ScopedTypeVariables TemplateHaskell TupleSections TypeFamilies TypeOperators ViewPatterns
     ghc-options: -O2 -Wall -threaded -rtsopts -with-rtsopts=-N
     build-depends:
